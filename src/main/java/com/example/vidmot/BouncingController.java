@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class BouncingController {
-    private Fxml_ lesaFxml;
+    private FXML_Lestur lesaFxml;
     @FXML
     private Label fxStig;
     // @FXML
