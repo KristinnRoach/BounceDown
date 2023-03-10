@@ -4,18 +4,16 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 public class LeikbordC extends Pane implements LeikHluturInterface {
+    @FXML
+    private BoltiC fxBolti;
     public BoltiC getFxBolti() {
         return fxBolti;
     }
+   // @FXML
+    //protected PallurC fxPallur1;
 
-    @FXML
-    private BoltiC fxBolti;
-    @FXML
-    private PallurC fxPallur1;
-    @FXML
-    private PallurC fxPallur2;
-    @FXML
-    private PallurC fxPallur3;
+    public PallurC getFxPallur1() { return fxPallur1; }
+
 
 
     public LeikbordC() {
@@ -28,9 +26,16 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
 
     @Override
     public void afram() {
-        if (!boltiABotni() && fxBolti.getCorn()==null){
+        if (!boltiABotni() && fxBolti.getOnIt()==null){
             fxBolti.setRotate(Stefna.NIDUR.getGradur());
             fxBolti.afram();
+           // athugaBoltiAPalli(fxPallur1);
+        }
+    }
+    public void aframPallar() {
+        for (PallurC p : fxPallar) {
+            p.afram();
+            athugaBoltiAPalli(p);
         }
     }
 
@@ -42,18 +47,18 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
     }
 
     public void setjaBoltaAPall (PallurC p){
-        fxBolti.setCorn(p);
+        fxBolti.setOnIt(p);
     }
 
     public void hendaBoltaAfPalli (PallurC p){
-        fxBolti.setCorn(null);
+        fxBolti.setOnIt(null);
     }
 
     public void athugaBoltiAPalli(PallurC p){
         if(fxBolti.getBoundsInParent().intersects(p.getBoundsInParent())){
             setjaBoltaAPall(p);
-            fxBolti.setLayoutY(fxBolti.getCorn().getLayoutY() - fxBolti.getFitHeight());
-        } else if (p == fxBolti.getCorn()){
+            fxBolti.setLayoutY(fxBolti.getOnIt().getLayoutY() - fxBolti.getFitHeight());
+        } else if (p == fxBolti.getOnIt()){
             hendaBoltaAfPalli(p);
         }
     }

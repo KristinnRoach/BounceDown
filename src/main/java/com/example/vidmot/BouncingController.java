@@ -51,7 +51,6 @@ public class BouncingController {
     @FXML
     private void initialize() {
         leikurinn = new Leikur();
-
         this.fxStig.textProperty().bind(leikurinn.stiginProperty().asString());
         fxTester.setText("yoyoyoyoo");
     }
