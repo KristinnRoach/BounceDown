@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import com.example.vidmot.LeikbordC?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vidmot.BouncingController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vidmot.BouncingController">
+   <top>
+      <Label fx:id="fxTester" prefHeight="70.0" prefWidth="125.0" style="-fx-background-color: #FFF176;" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </top>
+   <left>
+      <Label fx:id="fxStig" prefHeight="40.0" prefWidth="102.0" BorderPane.alignment="CENTER" />
+   </left>
    <center>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@myndir/bolti.jpg" />
-         </image>
-      </ImageView>
+   </center>
+   <center>
+      <LeikbordC fx:id="fxLeikbord" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

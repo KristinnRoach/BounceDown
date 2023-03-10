@@ -12,7 +12,10 @@ public class BouncingApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(BouncingApplication.class.getResource("bouncing-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        BouncingController bc = fxmlLoader.getController();
         stage.setTitle("Bouncedown!");
+        bc.orvatakkar();
+        bc.startGame();
         stage.setScene(scene);
         stage.show();
     }
