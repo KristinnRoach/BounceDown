@@ -3,8 +3,6 @@ package com.example.vidmot;
 import com.example.vinnsla.Leikur;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,17 +10,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 
-import java.util.Date;
 import java.util.HashMap;
 
 public class BouncingController {
     private Leikur leikurinn;
-    private Timeline t;
+    private Timeline gameTime;
+    private Timeline pallaTime;
 
-    final ObjectProperty<Date> timeProp = new SimpleObjectProperty<>(new Date());
-    public ObjectProperty<Date> timeProperty() {
-        return timeProp;
-    }
     @FXML
     private Label fxStig;
     @FXML
@@ -56,7 +50,7 @@ public class BouncingController {
     }
 
     public void startGame() {
-        KeyFrame k = new KeyFrame(Duration.millis(50),    // hvert tímabil er 50 millisek.
+        KeyFrame k = new KeyFrame(Duration.millis(40),    // hvert tímabil er 50 millisek.
                 e -> {
                     fxLeikbord.afram();
                     leikurinn.haekkaStigin();
@@ -64,14 +58,23 @@ public class BouncingController {
                         leikLokid("ónóóó");
                     }
                 });
-        t = new Timeline(k);           // tengjum timeline og tímabilið
-        t.setCycleCount(Timeline.INDEFINITE);   // hve lengi tímalínan keyrist
-        t.play();                               // setja tímalínuna af stað
+        gameTime = new Timeline(k);           // tengjum timeline og tímabilið
+        gameTime.setCycleCount(Timeline.INDEFINITE);   // hve lengi tímalínan keyrist
+        gameTime.play();
+        KeyFrame p = new KeyFrame(Duration.millis(30),    // hvert tímabil er 50 millisek.
+                e -> {
+                    fxLeikbord.aframPallar();
+                });
+        pallaTime = new Timeline(p);
+        pallaTime.setCycleCount(Timeline.INDEFINITE);
+        pallaTime.play();
+        fxTester.setText("GAME ON");
     }
 
 
     private void leikLokid(String s) {
-        t.stop();
+        gameTime.stop();
+        pallaTime.stop();
         fxTester.setText(s);
     }
 

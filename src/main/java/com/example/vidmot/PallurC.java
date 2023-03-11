@@ -1,15 +1,17 @@
 package com.example.vidmot;
 
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 public class PallurC extends ImageView implements LeikHluturInterface {
 
-    private BouncingController bc;
-    // private LeikbordC leikbord;
-/*
+    // private BouncingController bc;
+    private LeikbordC leikbord;
+
     @FXML
     private PallurC fxPallur;
- */
+
     public PallurC() {
         try {
             FXML_Lestur.lesa(this, "pallur-view.fxml");
@@ -20,16 +22,21 @@ public class PallurC extends ImageView implements LeikHluturInterface {
     @Override
     public void afram() {
         // leikbord = (LeikbordC) this.getParent();
-        LeikbordC leikbord = bc.getFxLeikbord();
-        if (leikbord.fxPallur1.getLayoutY() <= 0){
-            int a = (int) (Math.random() * leikbord.getWidth()-leikbord.fxPallur1.getFitWidth());
-            int b = (int) (Math.random() * leikbord.getWidth()-leikbord.fxPallur1.getFitWidth());
-            leikbord.fxPallur1.setLayoutY(b + leikbord.getHeight());
-            leikbord.fxPallur1.setLayoutX(a);
+        // LeikbordC leikbord = bc.getFxLeikbord();
+        leikbord = (LeikbordC) getParent();
+        leikbord = (LeikbordC) this.getParent();
+        ObservableList<PallurC> pList= leikbord.getFxPallar();
+        for (PallurC p : pList ) {
+            if (p.getLayoutY() <= 0) {
+                int a = (int) (Math.random() * leikbord.getWidth() - p.getFitWidth());
+                int b = (int) (Math.random() * leikbord.getWidth() - p.getFitWidth());
+                p.setLayoutY(b + leikbord.getHeight());
+                p.setLayoutX(a);
         }
-        leikbord.fxPallur1.setLayoutY(leikbord.fxPallur1.getLayoutY()-4);
+        p.setLayoutY(p.getLayoutY()-0.1);
     }
     }
+}
 
 
 
