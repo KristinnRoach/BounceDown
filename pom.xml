@@ -20,6 +20,17 @@
             <artifactId>javafx-controls</artifactId>
             <version>19</version>
         </dependency>
+
+        <!-- bætti við fyrir audio -->
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>19</version>
+        </dependency>
+
+        <!-- bætti við fyrir audio -->
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
@@ -51,32 +62,6 @@
                     <target>19</target>
                 </configuration>
             </plugin>
-
-            <!-- Bætti þessu við til að reynað lára jar virka
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.example.bounceball/com.example.vidmot.BouncingApplication</mainClass>
-                        </manifest>
-                    </archive>
-                    <includes>
-                        <include>com.example.bounceball/com.example.vidmot.BouncingApplication</include>
-                        <include>com.example.bounceball/com.example.vidmot.BouncingController</include>
-                        <include>com.example.bounceball/com.example.vidmot.BoltiC</include>
-                        <include>com.example.bounceball/com.example.vidmot.LeikbordC</include>
-                        <include>com.example.bounceball/com.example.vidmot.PallurC</include>
-                        <include>com.example.bounceball/com.example.vnnsla.Leikur</include>
-                        <include>com.example.bounceball/resources/bolti-view.fxml</include>
-                        <include>com.example.bounceball/resources/pallur-view.fxml</include>
-                        <include>com.example.bounceball/resources/leikbord-view.fxml</include>
-
-                    </includes>
-                </configuration>
-            </plugin>
-            Bætti þessu, fyrir ofan, við til að reynað lára jar virka -->
 
             <plugin>
                 <groupId>org.openjfx</groupId>

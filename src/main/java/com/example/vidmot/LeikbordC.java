@@ -42,16 +42,13 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
 
     @Override
     public void afram() {
-        if (!boltiABotni() && fxBolti.getOnIt()==null){
-            fxBolti.setRotate(Stefna.NIDUR.getGradur());
-            fxBolti.afram();
-        }
-    }
-
-    public void aframPallar() {
         for (PallurC p : fxPallar) {
             p.afram();
             athugaBoltiAPalli(p);
+        }
+        if (!boltiABotni() && fxBolti.getOnIt()==null){
+            fxBolti.setRotate(Stefna.NIDUR.getGradur());
+            fxBolti.afram();
         }
     }
 

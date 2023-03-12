@@ -5,24 +5,38 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.net.URI;
 import java.util.HashMap;
+import java.util.Random;
 
 public class BouncingController {
     private Leikur leikurinn;
     private Timeline gameTime;
-    private Timeline pallaTime;
-
     @FXML
     private Label fxStig;
     @FXML
     private Label fxTester;
     @FXML
     private LeikbordC fxLeikbord;
+    @FXML
+    public MediaView mediaView;
+    @FXML
+    public Button fxAudioTest;
+
+
+
+    // public MediaView getMediaView() { return mediaView; }
+
 
     public LeikbordC getFxLeikbord() {
         return fxLeikbord;
@@ -46,11 +60,30 @@ public class BouncingController {
     private void initialize() {
         leikurinn = new Leikur();
         this.fxStig.textProperty().bind(leikurinn.stiginProperty().asString());
-        fxTester.setText("yoyoyoyoo");
+        fxTester.setText("GAME ON");
     }
-
+    @FXML
+    protected void sfxJump() {
+        try {
+            String path = "";
+            Media[] media = new Media[6];
+            URI[] uri = new URI[6];
+            for(int i = 0; i < 6; i++) {
+                path = "src/main/resources/com/example/vidmot/Audio/jump" + (i + 1) + ".aif";
+                uri[i] = new File(path).toURI();
+                media[i] = new Media(uri[i].toString());
+            }
+            Random rand = new Random();
+            int randInt = rand.nextInt(6);
+            MediaPlayer jump = new MediaPlayer(media[randInt]);
+            mediaView.setMediaPlayer(jump);
+            jump.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void startGame() {
-        KeyFrame k = new KeyFrame(Duration.millis(40),    // hvert tímabil er 50 millisek.
+        KeyFrame k = new KeyFrame(Duration.millis(30),    // hvert tímabil er 50 millisek.
                 e -> {
                     fxLeikbord.afram();
                     leikurinn.haekkaStigin();
@@ -61,20 +94,11 @@ public class BouncingController {
         gameTime = new Timeline(k);           // tengjum timeline og tímabilið
         gameTime.setCycleCount(Timeline.INDEFINITE);   // hve lengi tímalínan keyrist
         gameTime.play();
-        KeyFrame p = new KeyFrame(Duration.millis(30),    // hvert tímabil er 50 millisek.
-                e -> {
-                    fxLeikbord.aframPallar();
-                });
-        pallaTime = new Timeline(p);
-        pallaTime.setCycleCount(Timeline.INDEFINITE);
-        pallaTime.play();
-        fxTester.setText("GAME ON");
     }
 
 
     private void leikLokid(String s) {
         gameTime.stop();
-        pallaTime.stop();
         fxTester.setText(s);
     }
 
@@ -84,6 +108,8 @@ public class BouncingController {
         // setjum upp beina aðganginn frá örvatökkunum og í hornið
         stefnaMap.put(KeyCode.RIGHT, Stefna.HAEGRI);
         stefnaMap.put(KeyCode.LEFT, Stefna.VINSTRI);
+        stefnaMap.put(KeyCode.UP, Stefna.UPP);
+
 
         Scene s = fxStig.getScene();
         s.addEventFilter(KeyEvent.ANY,      //KeyEvents eru sendar á Scene
@@ -95,7 +121,7 @@ public class BouncingController {
 
 
    private void onActionKeys(KeyEvent event) {
-        try {
+       try {
             if (stefnaMap.get(event.getCode()) == null) {
                 event.consume();
             } else {

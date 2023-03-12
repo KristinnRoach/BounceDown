@@ -3,13 +3,17 @@ package com.example.vidmot;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
+
 public class BoltiC extends ImageView implements LeikHluturInterface {
 
     @FXML
     private BoltiC fxBolti;
     private PallurC onIt = null;
+    private BouncingController bc;
 
-    public PallurC getOnIt() { return onIt; }
+    public PallurC getOnIt() {
+        return onIt;
+    }
 
     public void setOnIt(PallurC Corn) {
         this.onIt = Corn;
@@ -25,7 +29,7 @@ public class BoltiC extends ImageView implements LeikHluturInterface {
 
     }
 
-   @Override
+    @Override
     public void afram() {
         if (fxBolti.getRotate() == Stefna.HAEGRI.getGradur()) {
             fxBolti.setLayoutX(fxBolti.getLayoutX() + 15);
@@ -35,7 +39,29 @@ public class BoltiC extends ImageView implements LeikHluturInterface {
             fxBolti.setLayoutX(fxBolti.getLayoutX() - 15);
         } else if (fxBolti.getRotate() == Stefna.NIDUR.getGradur()) {
             fxBolti.setLayoutY(fxBolti.getLayoutY() + 10);
+        } else if (fxBolti.getRotate() == Stefna.UPP.getGradur()) {
+            fxBolti.setLayoutY(fxBolti.getLayoutY() - 50);
         }
     }
 }
+
+/*
+@Override
+public void afram() {
+    TranslateTransition tr = new TranslateTransition();
+    tr.setNode(fxBolti);
+    tr.setDuration(Duration.millis(1000));
+    if (fxBolti.getRotate() == Stefna.HAEGRI.getGradur()) {
+
+    } else if (fxBolti.getRotate() == Stefna.VINSTRI.getGradur()) {
+
+    } else if (fxBolti.getRotate() == Stefna.NIDUR.getGradur()) {
+
+    } else if (fxBolti.getRotate() == Stefna.UPP.getGradur()) {
+        tr.setByY(250);
+        tr.play();
+    }
+ */
+
+
 
