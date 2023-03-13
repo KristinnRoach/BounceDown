@@ -20,11 +20,6 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
 
     ObservableList<PallurC> fxPallar= FXCollections.observableArrayList();
 
-
-    // public PallurC getFxPallur1() { return fxPallur1; }
-
-
-
     public LeikbordC() {
         try {
             FXML_Lestur.lesa(this, "leikbord-view.fxml");

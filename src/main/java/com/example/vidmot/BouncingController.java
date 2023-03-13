@@ -9,19 +9,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
-import java.io.File;
-import java.net.URI;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.Random;
 
 public class BouncingController {
     private Leikur leikurinn;
     private Timeline gameTime;
+    //private Animation animation = new Animation();
+    @FXML
+    protected BorderPane fxRoot;
     @FXML
     private Label fxStig;
     @FXML
@@ -32,7 +32,10 @@ public class BouncingController {
     public MediaView mediaView;
     @FXML
     public Button fxAudioTest;
+    private Audio audio = new Audio();
 
+    public BouncingController() throws IOException {
+    }
 
 
     // public MediaView getMediaView() { return mediaView; }
@@ -64,24 +67,10 @@ public class BouncingController {
     }
     @FXML
     protected void sfxJump() {
-        try {
-            String path = "";
-            Media[] media = new Media[6];
-            URI[] uri = new URI[6];
-            for(int i = 0; i < 6; i++) {
-                path = "src/main/resources/com/example/vidmot/Audio/jump" + (i + 1) + ".aif";
-                uri[i] = new File(path).toURI();
-                media[i] = new Media(uri[i].toString());
-            }
-            Random rand = new Random();
-            int randInt = rand.nextInt(6);
-            MediaPlayer jump = new MediaPlayer(media[randInt]);
-            mediaView.setMediaPlayer(jump);
-            jump.play();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       audio.sfxAudioJump();
     }
+    @FXML
+    protected void muteAudio() { audio.getMp().setMute(true); }
     public void startGame() {
         KeyFrame k = new KeyFrame(Duration.millis(30),    // hvert tímabil er 50 millisek.
                 e -> {
@@ -94,12 +83,14 @@ public class BouncingController {
         gameTime = new Timeline(k);           // tengjum timeline og tímabilið
         gameTime.setCycleCount(Timeline.INDEFINITE);   // hve lengi tímalínan keyrist
         gameTime.play();
+        audio.sfxPlayAudio();
     }
 
 
     private void leikLokid(String s) {
         gameTime.stop();
         fxTester.setText(s);
+        //animation.paint(0, 0, 0);
     }
 
 
@@ -132,6 +123,7 @@ public class BouncingController {
             event.consume();
         }
     }
+
 
 
    /* public void testBolti() {

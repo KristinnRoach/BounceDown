@@ -25,8 +25,6 @@ public class BoltiC extends ImageView implements LeikHluturInterface {
 
     public BoltiC() {
         FXML_Lestur.lesa(this, "bolti-view.fxml");
-        // fxBolti.setImage(new Image("src/main/resources/com/example/vidmot/myndir/boltiDwnLeft.png"));
-
     }
 
     @Override

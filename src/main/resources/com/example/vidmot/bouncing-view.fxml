@@ -7,13 +7,16 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vidmot.BouncingController">
+<BorderPane fx:id="fxRoot" maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.vidmot.BouncingController">
    <MediaView fx:id="mediaView" />
    <top>
-      <Label fx:id="fxTester" prefHeight="70.0" prefWidth="125.0" style="-fx-background-color: #FFF176;" BorderPane.alignment="CENTER">
+      <Label fx:id="fxTester" prefHeight="70.0" prefWidth="611.0" style="-fx-background-color: #FFF176;" BorderPane.alignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
+         <graphic>
+            <Button fx:id="fxMute" alignment="CENTER" mnemonicParsing="false" onAction="#muteAudio" prefHeight="30.0" prefWidth="107.0" text="Mute" />
+         </graphic>
       </Label>
    </top>
    <left>
