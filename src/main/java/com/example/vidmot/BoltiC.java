@@ -10,6 +10,9 @@ public class BoltiC extends ImageView implements LeikHluturInterface {
     private BoltiC fxBolti;
     private PallurC onIt = null;
     private BouncingController bc;
+    private LeikbordC leikbord = (LeikbordC) this.getParent();
+
+    private final double OFFSET = 1;
 
     public PallurC getOnIt() {
         return onIt;
@@ -29,8 +32,16 @@ public class BoltiC extends ImageView implements LeikHluturInterface {
 
     @Override
     public void afram() {
+
+        /*
+        fxBolti.setLayoutX((int) (fxBolti.getLayoutX() + leikbord.getWidth() + (int) Math.cos(Math.toRadians(getRotate())) * OFFSET) % (int) leikbord.getWidth());
+        fxBolti.setLayoutY((int) (fxBolti.getLayoutY() + leikbord.getHeight() - (int) Math.sin(Math.toRadians(getRotate())) * OFFSET) % (int) leikbord.getHeight());
+        */
+
+        //TranslateTransition translateTransition = new TranslateTransition(Duration.millis(40));
         if (fxBolti.getRotate() == Stefna.HAEGRI.getGradur()) {
             fxBolti.setLayoutX(fxBolti.getLayoutX() + 15);
+            //fxBolti.setTranslateX(getTranslateX() + 15);
         } else if (fxBolti.getRotate() == Stefna.VINSTRI.getGradur()) {
             //fxBolti.setTranslateZ(fxBolti.getBoundsInLocal().getWidth() / 2.0);
             //fxBolti.setRotationAxis(Rotate.Y_AXIS);
@@ -42,6 +53,8 @@ public class BoltiC extends ImageView implements LeikHluturInterface {
         }
     }
 }
+
+
 
 /*
 @Override

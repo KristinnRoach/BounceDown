@@ -19,15 +19,18 @@
          </graphic>
       </Label>
    </top>
-   <left>
-      <Label fx:id="fxStig" prefHeight="40.0" prefWidth="102.0" BorderPane.alignment="CENTER" />
-   </left>
    <center>
-   </center>
-   <center>
-      <LeikbordC fx:id="fxLeikbord" maxHeight="800.0" maxWidth="600.0" minHeight="800.0" minWidth="600.0" prefHeight="800.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </center>
    <right>
-      <Button fx:id="fxAudioTest" mnemonicParsing="false" onAction="#sfxJump" text="Button" BorderPane.alignment="CENTER" />
+      <Button fx:id="fxRestart" mnemonicParsing="false" onAction="#restart" text="RESTART" BorderPane.alignment="CENTER" />
    </right>
+   <center>
+      <LeikbordC maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="514.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Label fx:id="fxStig" prefHeight="94.0" prefWidth="587.0" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+   </bottom>
 </BorderPane>

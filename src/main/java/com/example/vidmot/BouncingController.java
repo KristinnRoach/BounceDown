@@ -31,15 +31,12 @@ public class BouncingController {
     @FXML
     public MediaView mediaView;
     @FXML
-    public Button fxAudioTest;
+    public Button fxRestart;
     private Audio audio = new Audio();
 
-    public BouncingController() throws IOException {
-    }
-
+    public BouncingController() throws IOException { }
 
     // public MediaView getMediaView() { return mediaView; }
-
 
     public LeikbordC getFxLeikbord() {
         return fxLeikbord;
@@ -47,32 +44,43 @@ public class BouncingController {
 
     private final HashMap<KeyCode, Stefna> stefnaMap = new HashMap<KeyCode, Stefna>();
 
-
-    // Skoða FRACTAL animation!! Setja inn ef hægt ok takk bæ
-    // ( gæti komið bara þegar mar deyr eðeikkað einfalt
-
-/*         Bindings.createDoubleBinding(()  -> {    // til að binda y gildið á boltanum við pallinn (breyta úr clock dæminu)
-            Date date = control.timePoperty().get();   // þegar boltinn snertir setja binding á og taka af þegar snertir ekki
-            return date == null ? "" : FORMAT.format(date);
-        }, control.timeProp));
-
- */
-
-
     @FXML
     private void initialize() {
         leikurinn = new Leikur();
         this.fxStig.textProperty().bind(leikurinn.stiginProperty().asString());
         fxTester.setText("GAME ON");
     }
+/*    private void displayApplication() {
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    (new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     @FXML
-    protected void sfxJump() {
-       audio.sfxAudioJump();
+    public void restart(){
+        leikLokid("Restarting!");
+        BouncingApplication BA = new
     }
+*/
     @FXML
-    protected void muteAudio() { audio.getMp().setMute(true); }
+    protected void sfxJump() { audio.sfxAudioJump(); }
+    @FXML
+    protected void muteAudio() {
+        if (audio.getMp().isMute()) {
+            audio.getMp().setMute(false);
+        } else {
+            audio.getMp().setMute(true);
+        }
+    }
+
     public void startGame() {
-        KeyFrame k = new KeyFrame(Duration.millis(30),    // hvert tímabil er 50 millisek.
+        KeyFrame k = new KeyFrame(Duration.millis(10),
                 e -> {
                     fxLeikbord.afram();
                     leikurinn.haekkaStigin();
@@ -80,8 +88,8 @@ public class BouncingController {
                         leikLokid("ónóóó");
                     }
                 });
-        gameTime = new Timeline(k);           // tengjum timeline og tímabilið
-        gameTime.setCycleCount(Timeline.INDEFINITE);   // hve lengi tímalínan keyrist
+        gameTime = new Timeline(k);
+        gameTime.setCycleCount(Timeline.INDEFINITE);
         gameTime.play();
         audio.sfxPlayAudio();
     }
@@ -103,13 +111,9 @@ public class BouncingController {
 
 
         Scene s = fxStig.getScene();
-        s.addEventFilter(KeyEvent.ANY,      //KeyEvents eru sendar á Scene
-                event -> {      // lambda fall - event er parameter
-                    // flettum upp horninu fyrir KeyCode í map
-                    onActionKeys(event);
-                });
+        s.addEventFilter(KeyEvent.ANY,
+                event -> { onActionKeys(event); } );
     }
-
 
    private void onActionKeys(KeyEvent event) {
        try {
@@ -118,18 +122,10 @@ public class BouncingController {
             } else {
                 fxLeikbord.getFxBolti().setStefna(stefnaMap.get(event.getCode()).getGradur());
                 fxLeikbord.getFxBolti().afram();
+                if(event.getCode() == KeyCode.UP) { sfxJump(); }
         }
         } catch (NullPointerException e) {
             event.consume();
         }
     }
-
-
-
-   /* public void testBolti() {
-        fxLeikbord.getFxBolti().setRotate(Stefna.NIDUR.gradur);
-        for (int i = 0; i < 50; i++) {
-            fxLeikbord.getFxBolti().afram();
-        }
-    } */
 }

@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
 public class LeikbordC extends Pane implements LeikHluturInterface {
+    private BouncingController bc;
+    private Audio audio = new Audio();
+
     @FXML
     private BoltiC fxBolti;
     public BoltiC getFxBolti() {
@@ -41,11 +44,25 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
             p.afram();
             athugaBoltiAPalli(p);
         }
-        if (!boltiABotni() && fxBolti.getOnIt()==null){
+        if (!boltiABotni() && fxBolti.getOnIt() == null) {
             fxBolti.setRotate(Stefna.NIDUR.getGradur());
             fxBolti.afram();
         }
+        if (fxBolti.getLayoutX() > getWidth() - fxBolti.getFitWidth()) {
+            fxBolti.setLayoutX(0 + fxBolti.getFitWidth()); }
+        if (fxBolti.getLayoutX() < 0 + fxBolti.getFitWidth()) {
+            fxBolti.setLayoutX(getWidth() - fxBolti.getFitWidth());
+        }
     }
+   /* public void ballAtBorder(){
+        if (fxBolti.getLayoutX() >= this.getWidth() - fxBolti.getFitWidth()) {
+            fxBolti.setLayoutX(0);
+            audio.sfxAudioJump();
+        }
+        if (fxBolti.getLayoutX() <= this.getWidth() - fxBolti.getFitWidth()) {
+                fxBolti.setLayoutX(0);
+        }
+    } */
 
     public boolean boltiABotni() {
         if (fxBolti.getLayoutY() >= getHeight() - fxBolti.getFitHeight()) {
@@ -53,6 +70,7 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
         }
         return false;
     }
+
 
     public void setjaBoltaAPall (PallurC p){
         fxBolti.setOnIt(p);
