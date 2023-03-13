@@ -6,13 +6,13 @@ import javafx.scene.image.ImageView;
 
 public class BoltiC extends ImageView implements LeikHluturInterface {
 
+    private PallurC onIt = null;
+    private LeikbordC leikbord;
     @FXML
     private BoltiC fxBolti;
-    private PallurC onIt = null;
-    private BouncingController bc;
-    private LeikbordC leikbord = (LeikbordC) this.getParent();
 
-    private final double OFFSET = 1;
+    // private LeikbordC leikbord = (LeikbordC) this.getParent();
+    // private final double OFFSET = 1;
 
     public PallurC getOnIt() {
         return onIt;
@@ -50,7 +50,9 @@ public class BoltiC extends ImageView implements LeikHluturInterface {
             fxBolti.setLayoutY(fxBolti.getLayoutY() + 10);
         } else if (fxBolti.getRotate() == Stefna.UPP.getGradur()) {
             fxBolti.setLayoutY(fxBolti.getLayoutY() - 50);
-        }
+            leikbord.getBc().sfxJump();
+        } // leikbord.getBc().sfxJump();
+
     }
 }
 

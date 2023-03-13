@@ -7,8 +7,24 @@ import javafx.scene.layout.Pane;
 
 public class LeikbordC extends Pane implements LeikHluturInterface {
     private BouncingController bc;
-    private Audio audio = new Audio();
+    /**
+     * Nær í controllerinn
+     *
+     * @return controllerinn
+     */
+    public BouncingController getBc() {
+        return bc;
+    }
 
+    /**
+     * Setur controller fyrir viðmótshlutinn
+     *
+     * @param bc controllerinn
+     */
+    public void setBc(BouncingController bc) {
+        this.bc = bc;
+    }
+    private Audio audio = new Audio();
     @FXML
     private BoltiC fxBolti;
     public BoltiC getFxBolti() {
@@ -48,12 +64,14 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
             fxBolti.setRotate(Stefna.NIDUR.getGradur());
             fxBolti.afram();
         }
-        if (fxBolti.getLayoutX() > getWidth() - fxBolti.getFitWidth()) {
+    }
+
+
+       /* if (fxBolti.getLayoutX() > getWidth() - fxBolti.getFitWidth()) {
             fxBolti.setLayoutX(0 + fxBolti.getFitWidth()); }
         if (fxBolti.getLayoutX() < 0 + fxBolti.getFitWidth()) {
             fxBolti.setLayoutX(getWidth() - fxBolti.getFitWidth());
-        }
-    }
+        } */
    /* public void ballAtBorder(){
         if (fxBolti.getLayoutX() >= this.getWidth() - fxBolti.getFitWidth()) {
             fxBolti.setLayoutX(0);
@@ -63,6 +81,7 @@ public class LeikbordC extends Pane implements LeikHluturInterface {
                 fxBolti.setLayoutX(0);
         }
     } */
+
 
     public boolean boltiABotni() {
         if (fxBolti.getLayoutY() >= getHeight() - fxBolti.getFitHeight()) {

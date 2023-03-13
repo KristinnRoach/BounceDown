@@ -5,7 +5,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -13,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class BouncingController {
@@ -30,11 +28,9 @@ public class BouncingController {
     private LeikbordC fxLeikbord;
     @FXML
     public MediaView mediaView;
-    @FXML
-    public Button fxRestart;
+    /*@FXML
+    public Button fxRestart; */
     private Audio audio = new Audio();
-
-    public BouncingController() throws IOException { }
 
     // public MediaView getMediaView() { return mediaView; }
 
@@ -49,6 +45,7 @@ public class BouncingController {
         leikurinn = new Leikur();
         this.fxStig.textProperty().bind(leikurinn.stiginProperty().asString());
         fxTester.setText("GAME ON");
+        fxLeikbord.setBc(this);
     }
 /*    private void displayApplication() {
         Platform.runLater(new Runnable() {
@@ -68,8 +65,10 @@ public class BouncingController {
         BouncingApplication BA = new
     }
 */
-    @FXML
-    protected void sfxJump() { audio.sfxAudioJump(); }
+    public void sfxJump() {
+            audio.sfxAudioJump();
+        }
+
     @FXML
     protected void muteAudio() {
         if (audio.getMp().isMute()) {
@@ -122,7 +121,7 @@ public class BouncingController {
             } else {
                 fxLeikbord.getFxBolti().setStefna(stefnaMap.get(event.getCode()).getGradur());
                 fxLeikbord.getFxBolti().afram();
-                if(event.getCode() == KeyCode.UP) { sfxJump(); }
+                //if(event.getCode() == KeyCode.UP) { sfxJump(); }
         }
         } catch (NullPointerException e) {
             event.consume();

@@ -22,10 +22,10 @@
    <center>
    </center>
    <right>
-      <Button fx:id="fxRestart" mnemonicParsing="false" onAction="#restart" text="RESTART" BorderPane.alignment="CENTER" />
+   <!--   <Button fx:id="fxRestart" mnemonicParsing="false" text="RESTART" BorderPane.alignment="CENTER" />  -->
    </right>
    <center>
-      <LeikbordC maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="514.0" BorderPane.alignment="CENTER" />
+      <LeikbordC fx:id="fxLeikbord" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="514.0" BorderPane.alignment="CENTER" />
    </center>
    <bottom>
       <Label fx:id="fxStig" prefHeight="94.0" prefWidth="587.0" BorderPane.alignment="CENTER">
